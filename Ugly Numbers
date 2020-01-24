@@ -63,3 +63,53 @@ int main(){
 
 //////////////////////////SECOND METHOD DP///////////////////////////////////
 
+#include<bits/stdc++.h>
+using namespace std;
+#define inf 100000000000000000
+#define ll long long int
+#define pb push_back
+#define f first
+#define s second
+#define mod 1000000007
+#define fast ios_base::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL)
+void mahakal(){
+	#ifndef ONLINE_JUDGE
+	freopen("input.txt","r",stdin);
+	freopen("output.txt","w",stdout);
+	freopen("error.txt","w",stderr);
+	#endif
+}
+
+int main(){
+	mahakal();fast;
+
+	ll t;
+	cin>>t;
+	ll ugly[10005];
+	ugly[0]=1;
+	ll i=0 , j=0 , k=0;
+	ll a = 2 , b=3 , c=5;
+	for(ll ps=1;ps<=10000;ps++){
+		ll next=min({a,b,c});
+		ugly[ps]=next;
+		if(a==next){
+			i++;
+			a=ugly[i]*2;
+		}
+		if(b==next){
+			j++;
+			b=ugly[j]*3;
+		}
+		if(c==next){
+			k++;
+			c=ugly[k]*5;
+		}
+	}
+	while(t--){
+		ll a ;
+		cin>>a;
+		cout<<ugly[a-1]<<endl;
+	}
+
+	return 0;
+}
