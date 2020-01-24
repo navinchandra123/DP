@@ -1,0 +1,65 @@
+// https://www.geeksforgeeks.org/ugly-numbers/
+//////////////////////////////////FIRST METHOD (INEFFICIENT)
+
+#include<bits/stdc++.h>
+using namespace std;
+#define inf 100000000000000000
+#define ll long long int
+#define pb push_back
+#define f first
+#define s second
+#define mod 1000000007
+#define fast ios_base::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL)
+void mahakal(){
+	#ifndef ONLINE_JUDGE
+	freopen("input.txt","r",stdin);
+	freopen("output.txt","w",stdout);
+	freopen("error.txt","w",stderr);
+	#endif
+}
+
+ll DIV(ll n ,ll a){
+	while(n%a==0){
+		n/=a;
+	}
+	return n;
+}
+
+bool isUgly(ll n){
+	n=DIV(n,2LL);
+	n=DIV(n,3LL);
+	n=DIV(n,5LL);
+	if(n==1)return true;
+	return false;
+}
+
+ll solve(ll n){
+	ll i=0;
+	ll cnt=0;
+	while(n>cnt){
+		i++;
+ 		if(isUgly(i)){
+ 			cnt++;
+ 		}
+	}
+	return i;
+}
+
+int main(){
+	mahakal();fast;
+
+	ll t;
+	cin>>t;
+	while(t--){
+		ll n;
+		cin>>n ; 
+		ll ans=solve(n);
+		cout<<ans<<endl;
+	}
+
+	return 0;
+}
+
+
+//////////////////////////SECOND METHOD DP///////////////////////////////////
+
