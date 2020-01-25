@@ -1,0 +1,49 @@
+// https://www.geeksforgeeks.org/coin-change-dp-7/
+
+#include<bits/stdc++.h>
+using namespace std;
+#define inf 100000000000000000
+#define ll long long int
+#define pb push_back
+#define f first
+#define s second
+#define mod 1000000007
+#define fast ios_base::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL)
+void mahakal(){
+	#ifndef ONLINE_JUDGE
+	freopen("input.txt","r",stdin);
+	freopen("output.txt","w",stdout);
+	freopen("error.txt","w",stderr);
+	#endif
+}
+
+ll coin_change(ll* arr , ll n , ll sum){
+	ll table[sum+1];
+	memset(table , 0, sizeof table);
+	table[0]=1;
+	for(ll i=0;i<n;i++){
+		for(ll j=arr[i];j<=sum;j++){
+			table[j]+=table[j-arr[i]];
+		}
+	}
+	return table[sum];
+}
+
+int main(){
+	mahakal();fast;
+
+	ll t;
+	cin>>t;
+	while(t--){
+		ll n , sum;
+		cin>>n>>sum;
+		ll arr[n];
+		for(ll i=0;i<n;i++){
+			cin>>arr[i];
+		}
+		ll ans=coin_change(arr, n , sum);
+		cout<<ans<<endl;
+	}
+
+	return 0;
+}
