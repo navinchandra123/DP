@@ -1,0 +1,38 @@
+// https://www.geeksforgeeks.org/bell-numbers-number-of-ways-to-partition-a-set/
+
+#include<bits/stdc++.h>
+using namespace std;
+#define inf 100000000000000000
+#define ll long long int
+#define pb push_back
+#define f first
+#define s second
+#define mod 1000000007
+#define fast ios_base::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL)
+void mahakal(){
+	#ifndef ONLINE_JUDGE
+	freopen("input.txt","r",stdin);
+	freopen("output.txt","w",stdout);
+	freopen("error.txt","w",stderr);
+	#endif
+}
+ll bell[1005][1005];
+void bell_no(ll n=1000){
+	bell[0][0]=1;
+	for(ll i=1;i<=n;i++){
+		bell[i][0]=bell[i-1][i-1];
+		for(ll j=1 ; j<=i ; j++){
+			bell[i][j]=bell[i-1][j-1]+bell[i][j-1];
+		}
+	}
+}
+
+int main(){
+	mahakal();fast;
+	bell_no();
+	for(ll n=1 ;n<=10 ;n++){
+	 cout<<bell[n][0]<<" ";
+}
+
+	return 0;
+}
