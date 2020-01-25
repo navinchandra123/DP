@@ -1,0 +1,63 @@
+// https://practice.geeksforgeeks.org/problems/gold-mine-problem/0
+
+#include<bits/stdc++.h>
+using namespace std;
+#define inf 100000000000000000
+#define ll long long int
+#define pb push_back
+#define f first
+#define s second
+#define mod 1000000007
+#define fast ios_base::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL)
+void mahakal(){
+	#ifndef ONLINE_JUDGE
+	freopen("input.txt","r",stdin);
+	freopen("output.txt","w",stdout);
+	freopen("error.txt","w",stderr);
+	#endif
+}
+
+int main(){
+	mahakal();fast;
+
+	ll t;
+	cin>>t;
+	while(t--){
+		ll n , m ;
+		cin>>n>>m;
+		ll arr[n+1][m+1];
+		for(ll i=0;i<n;i++){
+			for(ll j=0;j<m;j++){
+				cin>>arr[i][j];
+			}
+		}
+		for(ll j=m-2;j>=0;j--){
+			for(ll i=0;i<n;i++){
+				ll right=0,up_right=0,down_right=0;
+				if(j+1<m){
+					right=arr[i][j+1];
+				}
+				if(i-1>=0 && j+1<m){
+					up_right=arr[i-1][j+1];
+				}
+				if(i+1<n && j+1<m){
+					down_right=arr[i+1][j+1];
+				}
+				arr[i][j]+=max({right,up_right, down_right});
+			}
+		}
+		// for(ll i=0;i<n;i++){
+		// 	for(ll j=0 ;j<m;j++){
+		// 		cout<<arr[i][j]<<" ";
+		// 	}
+		// 	cout<<endl;
+		// }
+		ll mx =-1 ;
+		for(ll i=0;i<n;i++){
+			mx=max(mx,arr[i][0]);
+		}
+		cout<<mx<<endl;
+	}
+
+	return 0;
+}
