@@ -1,0 +1,40 @@
+// https://www.geeksforgeeks.org/tiling-with-dominoes/
+
+
+#include<bits/stdc++.h>
+using namespace std;
+#define inf 100000000000000000
+#define ll long long int
+#define pb push_back
+#define f first
+#define s second
+#define mod 1000000007
+#define fast ios_base::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL)
+void mahakal(){
+	#ifndef ONLINE_JUDGE
+	freopen("input.txt","r",stdin);
+	freopen("output.txt","w",stdout);
+	freopen("error.txt","w",stderr);
+	#endif
+}
+
+int main(){
+	mahakal();fast;
+
+	ll t;
+	cin>>t;
+	while(t--){
+		ll n ;
+		cin>>n ;
+		ll a[n+1]={0};
+		ll b[n+1]={0};
+		a[0]=1,b[0]=0,a[1]=0,b[1]=1;
+		for(ll i=2 ;i<=n;i++){
+			b[i]=a[i-1]+b[i-2];
+			a[i]=a[i-2]+2*b[i-1];
+		}
+		cout<<a[n]<<endl;
+	}
+
+	return 0;
+}
