@@ -1,0 +1,56 @@
+// https://practice.geeksforgeeks.org/problems/cutted-segments/0
+
+#include<bits/stdc++.h>
+using namespace std;
+#define inf 100000000000000000
+#define ll long long int
+#define pb push_back
+#define f first
+#define s second
+#define mod 1000000007
+#define fast ios_base::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL)
+void mahakal(){
+	#ifndef ONLINE_JUDGE
+	freopen("input.txt","r",stdin);
+	freopen("output.txt","w",stdout);
+	freopen("error.txt","w",stderr);
+	#endif
+}
+ll solve(ll* arr , ll n , ll sum){
+	ll dp[sum+1];
+	memset(dp , -1 , sizeof dp);
+	dp[0]=0;
+	for(ll i=0;i<=sum ;i++){
+		if(dp[i]!=-1){
+		if(i+arr[0]<=sum){
+			dp[i+arr[0]]=max(dp[i+arr[0]],1+dp[i]);
+		}
+		if(i+arr[1]<=sum){
+			dp[i+arr[1]]=max(dp[i+arr[1]],1+dp[i]);
+		}
+		if(i+arr[2]<=sum){
+			dp[i+arr[2]]=max(dp[i+arr[2]],1+dp[i]);
+		}
+	}
+	}
+	return dp[sum];
+}
+
+int main(){
+// 	mahakal();fast;
+
+	ll t;
+	cin>>t;
+	while(t--){
+		ll n ;
+		cin>>n;
+		ll arr[3];
+		for(ll i=0;i<3;i++){
+			cin>>arr[i];
+		}
+		ll ans=solve(arr , 2 , n);
+		cout<<ans<<endl;
+	}
+
+	return 0;
+}
