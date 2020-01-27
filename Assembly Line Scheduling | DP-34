@@ -1,0 +1,60 @@
+// https://www.geeksforgeeks.org/assembly-line-scheduling-dp-34/
+
+
+#include<bits/stdc++.h>
+using namespace std;
+#define inf 100000000000000000
+#define ll long long int
+#define pb push_back
+#define f first
+#define s second
+#define mod 1000000007
+#define fast ios_base::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL)
+void mahakal(){
+	#ifndef ONLINE_JUDGE
+	freopen("input.txt","r",stdin);
+	freopen("output.txt","w",stdout);
+	freopen("error.txt","w",stderr);
+	#endif
+}
+ll arr[2][1000];
+ll TIME[2][1000];
+
+ll solve(ll n , ll a , ll b, ll c, ll d){
+	ll dp[2][n];
+	dp[0][n-1]=(c+arr[0][n-1]);
+	dp[1][n-1]=(d+arr[1][n-1]);
+	for(ll i= n-2 ;i>=0;i--){
+		dp[0][i]=min(dp[0][i+1],dp[1][i+1]+TIME[0][i+1])+arr[0][i];
+		dp[1][i]=min(dp[1][i+1], dp[0][i+1]+TIME[1][i+1])+arr[1][i];
+	}
+	return min(dp[0][0]+a, dp[1][0]+b);
+}
+
+int main(){
+	mahakal();fast;
+
+	ll t;
+	cin>>t;
+	while(t--){
+		ll n ;
+		cin>>n ;
+		for(ll i=0;i<2;i++){
+			for(ll j=0;j<n;j++){
+				cin>>arr[i][j];
+			}
+		}
+		for(ll i=0 ;i<2;i++){
+			for(ll j=0;j<n ;j++){
+				cin>>TIME[i][j];
+			}
+		}
+		ll a , b , c , d;
+		cin>>a>>b>>c>>d;
+
+		ll ans=solve(n , a , b,c,d);
+		cout<<ans<<endl;
+	}
+
+	return 0;
+}
