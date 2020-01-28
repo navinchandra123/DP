@@ -1,0 +1,92 @@
+// https://www.geeksforgeeks.org/find-maximum-length-snake-sequence/
+
+
+#include<bits/stdc++.h>
+using namespace std;
+#define inf 100000000000000000
+#define ll long long int
+#define pb push_back
+#define f first
+#define s second
+#define mod 1000000007
+#define fast ios_base::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL)
+void mahakal(){
+	#ifndef ONLINE_JUDGE
+	freopen("input.txt","r",stdin);
+	freopen("output.txt","w",stdout);
+	freopen("error.txt","w",stderr);
+	#endif
+}
+ll grid[1000][1000];
+ll dp[1000][1000];
+void PRINT(ll n , ll m , ll i , ll j){
+	// cerr<<dp[i][j]<<endl;
+	vector<pair<ll,ll>> vec;
+	vec.pb({i,j});
+	while(dp[i][j]!=0){
+		// cerr<<i<<" "<<j<<endl;
+		if(i-1>=0 && dp[i][j]-1==dp[i-1][j]){
+			vec.pb({i-1,j});
+			i--;
+		}
+		if(j-1>=0 && dp[i][j]-1==dp[i][j-1]){
+			vec.pb({i,j-1});
+			j--;
+		}
+	}
+	reverse(vec.begin(),vec.end());
+	for(ll i=0;i<vec.size();i++){
+		cout<<vec[i].f<<" "<<vec[i].s<<endl;
+	}
+}
+
+ll solve(ll n , ll m){
+	memset(dp, 0, sizeof dp);
+	dp[0][0]=0;
+	ll mx=0,x=0,y=0;
+	for(ll i=0;i<n ;i++){
+		for(ll j=0;j<m;j++){
+			if(i || j){
+				if(i-1>=0 && abs(grid[i][j]-grid[i-1][j])==1){
+					dp[i][j]=max(dp[i][j],dp[i-1][j]+1);
+				}
+				if(j-1>=0 && abs(grid[i][j]-grid[i][j-1])==1){
+					dp[i][j]=max(dp[i][j],dp[i][j-1]+1);
+				}
+				if(mx<dp[i][j]){
+					mx=dp[i][j];
+					x=i;y=j;
+				}
+			}
+		}
+	}
+	PRINT(n ,m, x ,y);
+	// for(ll i=0;i<n;i++){
+	// 	for(ll j=0;j<m;j++){
+	// 		cerr<<dp[i][j]<<" ";
+	// 	}
+	// 	cerr<<endl;
+	// }
+	return mx ;
+}
+
+int main(){
+	mahakal();fast;
+
+	ll t;
+	cin>>t;
+	while(t--){
+		ll n , m;
+		cin>>n>>m ;
+		// ll grid[n][m];
+		for(ll i=0;i<n;i++){
+			for(ll j=0;j<m ;j++){
+				cin>>grid[i][j];
+			}
+		}
+		ll ans = solve(n , m );
+		cout<<ans<<endl;
+	}
+
+	return 0;
+}
