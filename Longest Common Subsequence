@@ -1,0 +1,54 @@
+//   https://practice.geeksforgeeks.org/problems/longest-common-subsequence/0
+
+#include<bits/stdc++.h>
+using namespace std;
+#define inf 100000000000000000
+#define ll long long int
+#define pb push_back
+#define f first
+#define s second
+#define mod 1000000007
+#define fast ios_base::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL)
+void mahakal(){
+	#ifndef ONLINE_JUDGE
+	freopen("input.txt","r",stdin);
+	freopen("output.txt","w",stdout);
+	freopen("error.txt","w",stderr);
+	#endif
+}
+
+ll solve(string str1 , string str2){
+	ll n=str1.length(),m=str2.length();
+	ll dp[n+1][m+1];
+	for(ll i=0;i<=n ;i++){
+		for(ll j=0;j<=m;j++){
+			if(i==0 || j==0){
+				dp[i][j]=0;
+			}
+			else if(str1[i-1]==str2[j-1]){
+				dp[i][j]=1+dp[i-1][j-1];
+			}
+			else{
+				dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+			}
+		}
+	}
+	return dp[n][m];
+}
+
+int main(){
+	mahakal();fast;
+
+	ll t;
+	cin>>t;
+	while(t--){
+		ll n , m;
+		cin>>n>>m;
+		string str1 , str2 ;
+		cin>>str1 >> str2;
+		ll ans = solve(str1 , str2);
+		cout<<ans<<endl;
+	}
+
+	return 0;
+}
