@@ -1,0 +1,71 @@
+//  https://www.geeksforgeeks.org/maximum-sum-increasing-subsequence-from-a-prefix-and-a-given-element-after-prefix-is-must/
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+#define inf 100000000000000000
+#define ll long long int
+#define pb push_back
+#define f first
+#define s second
+#define mod 1000000007
+#define fast ios_base::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL)
+void mahakal(){
+	#ifndef ONLINE_JUDGE
+	freopen("input.txt","r",stdin);
+	freopen("output.txt","w",stdout);
+	freopen("error.txt","w",stderr);
+	#endif
+}
+
+ll solve(ll* arr , ll n ,ll idx , ll k){
+	ll dp[n+1][n+1];
+	memset(dp , 0, sizeof dp);
+	for(ll i=0;i<n;i++){
+		if(arr[i]>arr[0]){
+			dp[0][i]=arr[i]+arr[0];
+		}
+		else{
+			dp[0][i]=arr[i];
+		}
+	}
+
+	for(ll i=1;i<n;i++){
+		for(ll j=0;j<n;j++){
+			if(arr[j]>arr[i] && j>i){
+				dp[i][j]=max(dp[i-1][j], dp[i-1][i]+arr[j]);
+			}
+			else{
+				dp[i][j]=dp[i-1][j];
+			}
+		}
+	}
+	// for(ll i=0;i<=n;i++){
+ //      for(ll j=0;j<n ;j++){
+ //        cerr<<dp[i][j]<<" ";
+ //      }
+ //      cerr<<endl;
+ //    }
+	return dp[idx][k];
+}
+
+int main(){
+	mahakal();fast;
+
+	ll t;
+	cin>>t;
+	while(t--){
+		ll n,index,k ;
+		cin>>n>>index>>k;
+		ll arr[n];
+		for(ll i=0;i<n;i++){
+			cin>>arr[i];
+		}
+
+		ll ans = solve(arr , n , index , k);
+		cout<<ans<<endl;
+	}
+
+	return 0;
+}
