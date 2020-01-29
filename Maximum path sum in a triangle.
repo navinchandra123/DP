@@ -1,0 +1,57 @@
+//    https://www.geeksforgeeks.org/maximum-path-sum-triangle/
+
+
+#include<bits/stdc++.h>
+using namespace std;
+#define inf 100000000000000000
+#define ll long long int
+#define pb push_back
+#define f first
+#define s second
+#define mod 1000000007
+#define N 1000
+#define fast ios_base::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL)
+void mahakal(){
+	#ifndef ONLINE_JUDGE
+	freopen("input.txt","r",stdin);
+	freopen("output.txt","w",stdout);
+	freopen("error.txt","w",stderr);
+	#endif
+}
+ll arr[N][N];
+ll solve(ll n){
+	for(ll i=n-2 ;i>=0 ;i--){
+		for(ll j=0;j<n ;j++){
+			ll mx =0;
+			if(i+1<n){
+				mx = arr[i+1][j];
+			}
+			if(i+1<n && j+1<n){
+				mx = max(mx , arr[i+1][j+1]);
+			}
+			arr[i][j]=mx+arr[i][j];
+		}
+	}
+	return arr[0][0];
+}
+
+int main(){
+	mahakal();fast;
+
+	ll t;
+	cin>>t;
+	while(t--){
+		ll n ;
+		cin>>n ;
+		for(ll i=0;i<n;i++){
+			for(ll j=0;j<n ;j++){
+				cin>>arr[i][j];
+			}
+		}
+		ll ans = solve( n);
+		cout<<ans<<endl;
+
+	}
+
+	return 0;
+}
