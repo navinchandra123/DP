@@ -1,0 +1,52 @@
+//  https://www.geeksforgeeks.org/maximum-difference-zeros-ones-binary-string-set-2-time/
+
+
+#include<bits/stdc++.h>
+#include <numeric> 
+using namespace std;
+#define inf 100000000000000000
+#define ll long long int
+#define pb push_back
+#define f first
+#define s second
+#define mod 1000000007
+#define fast ios_base::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL)
+void mahakal(){
+	#ifndef ONLINE_JUDGE
+	freopen("input.txt","r",stdin);
+	freopen("output.txt","w",stdout);
+	freopen("error.txt","w",stderr);
+	#endif
+}
+
+ll solve(string str){
+	ll n=str.length();
+	ll arr[n];
+	for(ll i=0;i<n;i++){
+		if(str[i]=='0')arr[i]=1;
+		else arr[i]=-1;
+	}
+	ll mx=0,tmx=0;
+	for(ll i=0;i<n;i++){
+		mx+=arr[i];
+		tmx=max(tmx,mx);
+		if(mx<0)mx=0;
+	}
+	return tmx==0 ? -1 : tmx;
+
+}
+
+int main(){
+	mahakal();fast;
+
+	ll t;
+	cin>>t;
+	while(t--){
+		string str;
+		cin>>str;
+		ll ans = solve(str);
+		cout<<ans<<endl;
+	}
+
+	return 0;
+}
